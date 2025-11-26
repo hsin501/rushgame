@@ -30,7 +30,7 @@ export const GameUI = ({
     return (
       <div className='menu-overlay'>
         <div className='menu-card'>
-          <h1 className='title'>rushgame</h1>
+          <h1 className='title'>上鏈節小遊戲</h1>
           <p className='subtitle'>
             按下 <span className='key-hint'>空白鍵</span> 或{' '}
             <span className='key-hint'>點擊螢幕</span> 跳躍。

@@ -9,6 +9,23 @@ export default function App() {
   const { gameState, score, highScore, distance, startGame, jump } =
     useGameEngine(canvasRef);
 
+  const requestFullscreen = () => {
+    const el = document.documentElement;
+    const fn =
+      el.requestFullscreen ||
+      el.webkitRequestFullscreen ||
+      el.mozRequestFullScreen ||
+      el.msRequestFullscreen;
+    if (fn) {
+      fn.call(el).catch(() => {});
+    }
+  };
+
+  const handleStart = () => {
+    requestFullscreen();
+    startGame();
+  };
+
   const handlePointerDown = (e) => {
     if (e) {
       e.preventDefault();
@@ -16,8 +33,11 @@ export default function App() {
     }
     if (gameState === GameState.PLAYING) {
       jump();
-    } else if (gameState === GameState.START || gameState === GameState.GAME_OVER) {
-      startGame();
+    } else if (
+      gameState === GameState.START ||
+      gameState === GameState.GAME_OVER
+    ) {
+      handleStart();
     }
   };
 
@@ -30,7 +50,7 @@ export default function App() {
           gameState === GameState.START ||
           gameState === GameState.GAME_OVER
         ) {
-          startGame();
+          handleStart();
         }
       }
     };
@@ -60,8 +80,8 @@ export default function App() {
           score={score}
           highScore={highScore}
           distance={distance}
-          onStart={startGame}
-          onRestart={startGame}
+          onStart={handleStart}
+          onRestart={handleStart}
         />
       </div>
       <div className='mobile-hint'>輕觸螢幕跳躍 (可二段跳)</div>

@@ -1,0 +1,45 @@
+:root {
+  --bg-color: #0f172a; /* slate-900 */
+  --card-bg: #1e293b; /* slate-800 */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --accent-gold: #fd6f15;
+  --accent-red: #fd6f15;
+  --primary-btn: #fd6f15;
+  --primary-btn-hover: #e65f0e;
+  --danger-btn: #fd6f15;
+  --danger-btn-hover: #e65f0e;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 17px;
+  touch-action: none;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

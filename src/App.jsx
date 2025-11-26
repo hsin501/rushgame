@@ -12,6 +12,14 @@ export default function App() {
   const { gameState, score, highScore, distance, startGame, jump } =
     useGameEngine(canvasRef);
 
+  const handleCanvasInput = () => {
+    if (gameState === GameState.PLAYING) {
+      jump();
+    } else if (gameState === GameState.START || gameState === GameState.GAME_OVER) {
+      startGame();
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space' || e.code === 'ArrowUp') {
@@ -49,7 +57,8 @@ export default function App() {
           ref={canvasRef}
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}
-          onMouseDown={() => gameState === GameState.PLAYING && jump()}
+          onMouseDown={handleCanvasInput}
+          onTouchStart={handleCanvasInput}
         />
         <GameUI
           gameState={gameState}

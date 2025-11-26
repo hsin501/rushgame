@@ -9,7 +9,11 @@ export default function App() {
   const { gameState, score, highScore, distance, startGame, jump } =
     useGameEngine(canvasRef);
 
-  const handleCanvasInput = () => {
+  const handlePointerDown = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (gameState === GameState.PLAYING) {
       jump();
     } else if (gameState === GameState.START || gameState === GameState.GAME_OVER) {
@@ -31,19 +35,9 @@ export default function App() {
       }
     };
 
-    const handleTouch = (e) => {
-      if (e.target.tagName !== 'BUTTON') {
-        if (gameState === GameState.PLAYING) {
-          jump();
-        }
-      }
-    };
-
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('touchstart', handleTouch);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('touchstart', handleTouch);
     };
   }, [gameState, jump, startGame]);
 
@@ -59,8 +53,7 @@ export default function App() {
           ref={canvasRef}
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}
-          onMouseDown={handleCanvasInput}
-          onTouchStart={handleCanvasInput}
+          onPointerDown={handlePointerDown}
         />
         <GameUI
           gameState={gameState}

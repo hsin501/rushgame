@@ -1,6 +1,3 @@
-// 檔名建議: GameUI.jsx
-// 在 VS Code 中請將此檔案存為 components/GameUI.jsx
-
 import React from 'react';
 import { GameState } from '../types';
 import { Play, RotateCcw, Coins, Trophy, Footprints } from 'lucide-react';
@@ -18,8 +15,8 @@ export const GameUI = ({
       <div className='ui-overlay'>
         <div className='hud-group'>
           <div className='hud-pill gold'>
-            <Coins size={20} />
-            <span>{score} BTC</span>
+            <Coins size={20}/>
+            <span>{score}</span>
           </div>
           <div className='hud-pill small'>
             距離: {Math.floor(distance / 10)}m
@@ -33,7 +30,7 @@ export const GameUI = ({
     return (
       <div className='menu-overlay'>
         <div className='menu-card'>
-          <h1 className='title'>上鏈節衝衝衝</h1>
+          <h1 className='title'>rushgame</h1>
           <p className='subtitle'>
             按下 <span className='key-hint'>空白鍵</span> 或{' '}
             <span className='key-hint'>點擊螢幕</span> 跳躍。

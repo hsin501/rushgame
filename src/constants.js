@@ -1,6 +1,3 @@
-// 檔名建議: constants.js
-// 在 VS Code 中請將此檔案存為 constants.js
-
 export const CANVAS_WIDTH = 1200; // Virtual width for calculation
 export const CANVAS_HEIGHT = 600; // Virtual height for calculation
 

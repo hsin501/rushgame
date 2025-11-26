@@ -1,6 +1,3 @@
-// 檔名建議: engine.js
-// 在 VS Code 中請將此檔案存為 services/engine.js
-
 import { CANVAS_HEIGHT, CANVAS_WIDTH, COIN_SIZE } from '../constants';
 
 // --- Collision Detection ---

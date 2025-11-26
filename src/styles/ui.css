@@ -26,6 +26,7 @@
   font-family: monospace;
   /*font-size: 1.35rem;*/
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
 }
 
 .hud-pill.gold {
@@ -33,7 +34,6 @@
 }
 
 .hud-pill.small {
-  font-size: 1rem;
   padding: 4px 12px;
   color: var(--text-secondary);
 }

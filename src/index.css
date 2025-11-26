@@ -132,7 +132,7 @@ canvas {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
   max-width: 90%;
   width: 60%;
-  height: 80%;
+  /*height: 80%;*/
   text-align: center;
   animation: fadeInZoom 0.3s ease-out;
 }
@@ -149,7 +149,7 @@ canvas {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(to right, #fbbf24, #ea580c);
+  background: #ea580c;
   -webkit-background-clip: text;
   color: transparent;
   display: inline-block;
@@ -229,10 +229,10 @@ canvas {
 }
 
 .btn-primary {
-  background: linear-gradient(to right, #4f46e5, #7e22ce);
+  background: #ea580c;
 }
 .btn-primary:hover {
-  background: linear-gradient(to right, #4338ca, #6b21a8);
+  background: #ea580c;
 }
 
 .btn-danger {

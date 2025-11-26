@@ -21,5 +21,5 @@ export const COLORS = {
   platform: '#64748b', // slate-500
   platformTop: '#94a3b8', // slate-400
   bitcoin: '#f59e0b', // amber-500
-  player: '#ef4444', // red-500
+  player: '#fd6f15', // red-500
 };

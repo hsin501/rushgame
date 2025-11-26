@@ -1,4 +1,8 @@
 import { COLORS } from '../constants.js';
+import runnerIconUrl from '../assets/icon-120x120.png';
+
+const runnerIcon = new Image();
+runnerIcon.src = runnerIconUrl;
 
 const withContext = (canvas) => {
   if (!canvas) return null;
@@ -87,8 +91,6 @@ export const drawScene = (canvas, state) => {
   });
 
   if (player) {
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
-    ctx.fillRect(player.x - 20, player.y, player.w, player.h);
 
     ctx.fillStyle = colors.player;
     ctx.shadowBlur = 20;
@@ -98,6 +100,20 @@ export const drawScene = (canvas, state) => {
     ctx.fillStyle = 'white';
     ctx.shadowBlur = 0;
     ctx.fillRect(player.x + player.w - 12, player.y + 8, 8, 8);
+
+    if (runnerIcon.complete && runnerIcon.naturalWidth > 0) {
+      const iconSize = Math.min(player.w, player.h);
+      ctx.save();
+      ctx.translate(player.x + player.w / 2, player.y + player.h / 2);
+      ctx.drawImage(
+        runnerIcon,
+        -iconSize / 2,
+        -iconSize / 2,
+        iconSize,
+        iconSize
+      );
+      ctx.restore();
+    }
   }
 
   particles.forEach((part) => {

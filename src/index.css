@@ -1,0 +1,388 @@
+:root {
+  --bg-color: #0f172a; /* slate-900 */
+  --card-bg: #1e293b; /* slate-800 */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --accent-gold: #fbbf24;
+  --accent-red: #ef4444;
+  --primary-btn: #4f46e5;
+  --primary-btn-hover: #4338ca;
+  --danger-btn: #dc2626;
+  --danger-btn-hover: #b91c1c;
+}
+
+* {
+  box-sizing: border-box;
+   -webkit-touch-callout: none; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  touch-action: none;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   position: fixed;
+   touch-action: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #334155;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* UI Overlays */
+.ui-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  padding: 16px;
+}
+
+.hud-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.hud-pill {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hud-pill.gold {
+  color: var(--accent-gold);
+}
+
+.hud-pill.small {
+  font-size: 0.875rem;
+  padding: 4px 12px;
+  color: var(--text-secondary);
+}
+
+/* Menus (Start / Game Over) */
+.menu-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 30;
+}
+
+.menu-card {
+  background-color: var(--card-bg);
+  padding: 10px;
+  border-radius: 16px;
+  border: 2px solid #475569;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  max-width: 90%;
+  width: 60%;
+  height: 80%;
+  text-align: center;
+  animation: fadeInZoom 0.3s ease-out;
+}
+
+.game-over-bg {
+  background-color: rgba(127, 29, 29, 0.4);
+}
+
+.game-over-card {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #fbbf24, #ea580c);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.key-hint {
+  background-color: #334155;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.stat-row {
+  background-color: rgba(51, 65, 85, 0.5);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.stat-value {
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-value.gold {
+  color: var(--accent-gold);
+}
+.stat-value.white {
+  color: white;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 9999px; /* Pill shape */
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #4f46e5, #7e22ce);
+}
+.btn-primary:hover {
+  background: linear-gradient(to right, #4338ca, #6b21a8);
+}
+
+.btn-danger {
+  width: 100%;
+  background-color: var(--danger-btn);
+  border-radius: 12px;
+}
+.btn-danger:hover {
+  background-color: var(--danger-btn-hover);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+}
+
+.mobile-hint {
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+/* --- Mobile Orientation Lock (轉向提示) --- */
+.orientation-lock {
+  display: none; /* 預設隱藏 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0f172a;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.phone-icon {
+  width: 60px;
+  height: 100px;
+  border: 4px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  animation: rotatePhone 2s infinite ease-in-out;
+}/* --- Mobile Orientation Lock (轉向提示) --- */
+.orientation-lock {
+  display: none; /* 預設隱藏 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0f172a;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.phone-icon {
+  width: 60px;
+  height: 100px;
+  border: 4px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  animation: rotatePhone 2s infinite ease-in-out;
+}/* --- Mobile Orientation Lock (轉向提示) --- */
+.orientation-lock {
+  display: none; /* 預設隱藏 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0f172a;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.phone-icon {
+  width: 60px;
+  height: 100px;
+  border: 4px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  animation: rotatePhone 2s infinite ease-in-out;
+}/* --- Mobile Orientation Lock (轉向提示) --- */
+.orientation-lock {
+  display: none; /* 預設隱藏 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0f172a;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.phone-icon {
+  width: 60px;
+  height: 100px;
+  border: 4px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  animation: rotatePhone 2s infinite ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .mobile-hint {
+    display: none;
+  }
+}
+
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotatePhone {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* 當螢幕是直向 (Portrait) 且寬度小於 768px (手機/平板) 時顯示提示 */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+  .orientation-lock {
+    display: flex;
+  }
+  /* 隱藏遊戲本體 */
+  .game-container {
+    display: none;
+  }
+}

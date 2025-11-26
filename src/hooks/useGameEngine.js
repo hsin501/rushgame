@@ -16,6 +16,7 @@ import { drawScene } from '../services/renderer.js';
 
 export const useGameEngine = (canvasRef) => {
   const requestRef = useRef(0);
+  const lastTimeRef = useRef(0);
   const playerRef = useRef({
     x: 100,
     y: 0,
@@ -90,27 +91,27 @@ export const useGameEngine = (canvasRef) => {
     }
   }, [gameState]);
 
-  const update = useCallback(() => {
+  const update = useCallback((dtFactor) => {
     if (gameState !== GameState.PLAYING) return;
 
     const player = playerRef.current;
 
     if (gameSpeedRef.current < INITIAL_CONFIG.speedMax) {
-      gameSpeedRef.current += INITIAL_CONFIG.acceleration;
+      gameSpeedRef.current += INITIAL_CONFIG.acceleration * dtFactor;
     }
 
     const currentSpeed = gameSpeedRef.current;
-    distanceRef.current += currentSpeed;
+    distanceRef.current += currentSpeed * dtFactor;
 
     if (Math.floor(distanceRef.current) % 10 === 0) {
       setDisplayDistance(Math.floor(distanceRef.current));
     }
 
-    player.x += currentSpeed;
+    player.x += currentSpeed * dtFactor;
     cameraXRef.current = player.x - 200;
 
-    player.vy += INITIAL_CONFIG.gravity;
-    player.y += player.vy;
+    player.vy += INITIAL_CONFIG.gravity * dtFactor;
+    player.y += player.vy * dtFactor;
 
     player.isGrounded = false;
 
@@ -174,9 +175,9 @@ export const useGameEngine = (canvasRef) => {
     }
 
     particlesRef.current.forEach((p) => {
-      p.x += p.vx;
-      p.y += p.vy;
-      p.life -= 0.05;
+      p.x += p.vx * dtFactor;
+      p.y += p.vy * dtFactor;
+      p.life -= 0.05 * dtFactor;
     });
     particlesRef.current = particlesRef.current.filter((p) => p.life > 0);
   }, [gameState]);
@@ -192,14 +193,23 @@ export const useGameEngine = (canvasRef) => {
     });
   }, [canvasRef]);
 
-  const loop = useCallback(() => {
-    update();
-    drawFrame();
+  const loop = useCallback(
+    (timestamp) => {
+      const lastTime = lastTimeRef.current || timestamp;
+      const deltaMs = timestamp - lastTime;
+      lastTimeRef.current = timestamp;
 
-    if (gameState === GameState.PLAYING) {
-      requestRef.current = requestAnimationFrame(loop);
-    }
-  }, [update, drawFrame, gameState]);
+      const dtFactor = Math.min(Math.max(deltaMs / 16.666, 0.5), 2);
+
+      update(dtFactor);
+      drawFrame();
+
+      if (gameState === GameState.PLAYING) {
+        requestRef.current = requestAnimationFrame(loop);
+      }
+    },
+    [update, drawFrame, gameState]
+  );
 
   useEffect(() => {
     initGame();

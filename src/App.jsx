@@ -1,6 +1,3 @@
-// 檔名建議: App.jsx
-// 在 VS Code 中請將此檔案存為 App.jsx
-
 import React, { useEffect, useRef } from 'react';
 import { GameUI } from './components/GameUI';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
@@ -51,7 +48,12 @@ export default function App() {
   }, [gameState, jump, startGame]);
 
   return (
-    <div className='game-wrapper'>
+    <>
+      <div className="orientation-lock">
+        <div className="phone-icon"></div>
+        <div className="lock-text">請將手機轉為橫向<br/>以獲得最佳遊戲體驗</div>
+      </div>
+     <div className='game-wrapper'>
       <div className='game-container'>
         <canvas
           ref={canvasRef}
@@ -71,5 +73,7 @@ export default function App() {
       </div>
       <div className='mobile-hint'>輕觸螢幕跳躍 (可二段跳)</div>
     </div>
+    </>
+   
   );
 }

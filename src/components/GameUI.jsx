@@ -63,13 +63,13 @@ export const GameUI = ({
           <div className='stats-grid'>
             <div className='stat-row'>
               <span className='stat-label'>
-                <Coins size={30} /> 本局得分
+                <Coins size={22} /> 本局得分
               </span>
               <span className='stat-value gold'>{score}</span>
             </div>
             <div className='stat-row'>
               <span className='stat-label'>
-                <Footprints size={30} />
+                <Footprints size={22} />
                 奔跑距離
               </span>
               <span className='stat-value white'>
@@ -78,7 +78,7 @@ export const GameUI = ({
             </div>
             <div className='stat-row'>
               <span className='stat-label'>
-                <Trophy size={30} /> 最高分
+                <Trophy size={22} /> 最高分
               </span>
               <span className='stat-value white'>{highScore}</span>
             </div>

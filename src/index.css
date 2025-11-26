@@ -28,11 +28,14 @@ body {
   user-select: none;
   -webkit-user-select: none;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
    position: fixed;
+   touch-action: none;
+   overflow: hidden;
    touch-action: none;
 }
 
@@ -46,8 +49,8 @@ body {
 
 .game-wrapper {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,12 +59,17 @@ body {
 
 .game-container {
   position: relative;
-  width: 100%;
+  width: min(95vw, 190dvh, 1200px);
+  aspect-ratio: 2 / 1;
+  height: auto;
+  max-height: 100dvh;
   background-color: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 1px solid #334155;
+   @media (min-aspect-ratio: 2/1) {
+  }
 }
 
 canvas {
@@ -72,11 +80,14 @@ canvas {
 
 /* UI Overlays */
 .ui-overlay {
-  position: absolute;
+   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 20;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hud-group {
@@ -97,19 +108,12 @@ canvas {
   align-items: center;
   gap: 8px;
   font-family: monospace;
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.hud-pill.gold {
-  color: var(--accent-gold);
-}
-
-.hud-pill.small {
-  font-size: 0.875rem;
-  padding: 4px 12px;
-  color: var(--text-secondary);
-}
+.hud-pill.gold { color: var(--accent-gold); }
+.hud-pill.small { font-size: 0.875rem; padding: 4px 12px; color: var(--text-secondary); }
 
 /* Menus (Start / Game Over) */
 .menu-overlay {
@@ -126,13 +130,12 @@ canvas {
 
 .menu-card {
   background-color: var(--card-bg);
-  padding: 10px;
+  padding: 20px;
   border-radius: 16px;
   border: 2px solid #475569;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  max-width: 90%;
-  width: 60%;
-  height: 80%;
+  width: 90%;
+    max-width: 450px;
   text-align: center;
   animation: fadeInZoom 0.3s ease-out;
 }
@@ -146,7 +149,7 @@ canvas {
 }
 
 .title {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vh, 2.5rem); 
   font-weight: 800;
   margin-bottom: 1rem;
   background: linear-gradient(to right, #fbbf24, #ea580c);
@@ -247,12 +250,13 @@ canvas {
 
 .mobile-hint {
   position: absolute;
-  bottom: 16px;
+  bottom: 10px;
   width: 100%;
   text-align: center;
   color: #64748b;
   font-size: 0.75rem;
   pointer-events: none;
+  z-index: 10;
 }
 
 /* --- Mobile Orientation Lock (轉向提示) --- */
@@ -270,6 +274,7 @@ canvas {
   justify-content: center;
   color: white;
   text-align: center;
+  padding: 20px;
 }
 
 .phone-icon {
@@ -278,78 +283,7 @@ canvas {
   border: 4px solid white;
   border-radius: 10px;
   margin-bottom: 20px;
-  animation: rotatePhone 2s infinite ease-in-out;
-}/* --- Mobile Orientation Lock (轉向提示) --- */
-.orientation-lock {
-  display: none; /* 預設隱藏 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #0f172a;
-  z-index: 9999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
-
-.phone-icon {
-  width: 60px;
-  height: 100px;
-  border: 4px solid white;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  animation: rotatePhone 2s infinite ease-in-out;
-}/* --- Mobile Orientation Lock (轉向提示) --- */
-.orientation-lock {
-  display: none; /* 預設隱藏 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #0f172a;
-  z-index: 9999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
-
-.phone-icon {
-  width: 60px;
-  height: 100px;
-  border: 4px solid white;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  animation: rotatePhone 2s infinite ease-in-out;
-}/* --- Mobile Orientation Lock (轉向提示) --- */
-.orientation-lock {
-  display: none; /* 預設隱藏 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #0f172a;
-  z-index: 9999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
-
-.phone-icon {
-  width: 60px;
-  height: 100px;
-  border: 4px solid white;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  position: relative;
   animation: rotatePhone 2s infinite ease-in-out;
 }
 
@@ -370,19 +304,27 @@ canvas {
   }
 }
 
-@keyframes rotatePhone {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(-90deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* 當螢幕是直向 (Portrait) 且寬度小於 768px (手機/平板) 時顯示提示 */
-@media screen and (orientation: portrait) and (max-width: 768px) {
+@media screen and (orientation: portrait) {
+  /* 只有在裝置是直式的時候顯示鎖定畫面 */
   .orientation-lock {
     display: flex;
   }
+  
   /* 隱藏遊戲本體 */
-  .game-container {
+  .game-wrapper {
     display: none;
   }
+}
+
+@keyframes fadeInZoom {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rotatePhone {
+  0% { transform: rotate(0deg); opacity: 1; }
+  25% { transform: rotate(-90deg); opacity: 1; }
+  50% { transform: rotate(-90deg); opacity: 1; }
+  75% { transform: rotate(0deg); opacity: 1; }
+  100% { transform: rotate(0deg); opacity: 1; }
 }

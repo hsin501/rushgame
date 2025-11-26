@@ -103,17 +103,19 @@
 .stats-grid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .stat-row {
   background-color: rgba(51, 65, 85, 0.5);
-  padding: 12px;
+  padding: 16px 20px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
 .stat-label {
@@ -121,13 +123,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 .stat-value {
   font-family: monospace;
-  font-size: 1.65rem;
+  font-size: 1.85rem;
   font-weight: bold;
+  text-align: right;
 }
 
 .stat-value.gold {

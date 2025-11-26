@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { GameState } from '../types';
-import { Play, RotateCcw, Coins, Trophy } from 'lucide-react';
+import { Play, RotateCcw, Coins, Trophy, Footprints } from 'lucide-react';
 
 export const GameUI = ({
   gameState,
@@ -63,23 +63,24 @@ export const GameUI = ({
           <div className='stats-grid'>
             <div className='stat-row'>
               <span className='stat-label'>
-                <Trophy size={16} /> 最高分
+                <Coins size={30} /> 本局得分
               </span>
-              <span className='stat-value gold'>{highScore}</span>
+              <span className='stat-value gold'>{score}</span>
             </div>
             <div className='stat-row'>
               <span className='stat-label'>
-                <Coins size={16} /> 本局得分
-              </span>
-              <span className='stat-value white'>{score}</span>
-            </div>
-            <div className='stat-row' style={{ padding: '8px 16px' }}>
-              <span className='stat-label' style={{ fontSize: '0.85rem' }}>
+                <Footprints size={30} />
                 奔跑距離
               </span>
-              <span className='stat-value white' style={{ fontSize: '1.2rem' }}>
+              <span className='stat-value white'>
                 {Math.floor(distance / 10)}m
               </span>
+            </div>
+            <div className='stat-row'>
+              <span className='stat-label'>
+                <Trophy size={30} /> 最高分
+              </span>
+              <span className='stat-value white'>{highScore}</span>
             </div>
           </div>
 
